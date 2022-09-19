@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'assignments_tutor',
+    timestamps: false,
+    createdAt: false,
+    updatedAt: false,
   });
   return assignments_tutor;
 };

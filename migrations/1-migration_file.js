@@ -14,7 +14,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "migration_file",
-    "created": "2022-09-19T12:09:34.790Z",
+    "created": "2022-09-19T13:08:13.584Z",
     "comment": ""
 };
 
@@ -91,16 +91,6 @@ var migrationCommands = [{
                 "assignmentStatus": {
                     "type": Sequelize.INTEGER,
                     "field": "assignmentStatus"
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "field": "createdAt",
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "field": "updatedAt",
-                    "allowNull": false
                 }
             },
             {}
@@ -137,16 +127,6 @@ var migrationCommands = [{
                 "assignmentStatus": {
                     "type": Sequelize.INTEGER,
                     "field": "assignmentStatus"
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "field": "createdAt",
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "field": "updatedAt",
-                    "allowNull": false
                 }
             },
             {}

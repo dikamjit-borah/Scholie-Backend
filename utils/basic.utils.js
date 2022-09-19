@@ -22,6 +22,6 @@ module.exports = {
             response['data'] = fields
         }
 
-        return res.status(statusCode).send(response)
+        return res.status(statusCode ? statusCode : httpStatus.INTERNAL_SERVER_ERROR).send(response)
     }
 }

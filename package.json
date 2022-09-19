@@ -24,6 +24,7 @@
     "moment": "^2.29.4",
     "mysql2": "^2.3.3",
     "sequelize": "^6.23.0",
+    "sequelize-auto-migrations-v2": "^1.2.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

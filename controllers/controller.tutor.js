@@ -18,19 +18,27 @@ module.exports = {
 
             const assignmentId = v4()
             let assignmentsStudentsRows = []
+            let assignmentStudentsStr = ""
+            let assignmentStudentsCount
 
-            if (assignmentStudents && Array.isArray(assignmentStudents) && assignmentStudents.length) {
+            /* if (assignmentStudents && Array.isArray(assignmentStudents) && assignmentStudents.length) {
                 assignmentsStudentsRows = assignmentStudents.map((studentId) => {
                     return Object.values({ assignmentId, studentId })
                 })
+            } */
+
+            if (assignmentStudents && Array.isArray(assignmentStudents) && assignmentStudents.length) {
+                assignmentStudentsStr = assignmentStudents.join(',')
+                assignmentStudentsCount = assignmentStudents.length
             }
 
             const result1 = await serviceTutor.createNewAssignment(
                 assignmentId,
                 assignmentDescription,
-                new Date(),
-                new Date(), 
-                assignmentsStudentsRows
+                assignmentPublishedAt,
+                assignmentDeadline,
+                assignmentStudentsStr,
+                assignmentStudentsCount
             )
 
             if (result1 && result1.length) {

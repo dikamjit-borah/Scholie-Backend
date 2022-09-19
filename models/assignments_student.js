@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   assignments_student.init({
-    entryId: DataTypes.INTEGER,
+    entryId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     assignmentId: DataTypes.STRING,
     studentId: DataTypes.INTEGER,
     assignmentRemark: DataTypes.STRING,

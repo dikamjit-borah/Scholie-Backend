@@ -42,14 +42,9 @@
         "assignments_students": {
             "tableName": "assignments_students",
             "schema": {
-                "id": {
-                    "allowNull": false,
+                "entryId": {
                     "primaryKey": true,
                     "autoIncrement": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "entryId": {
                     "field": "entryId",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -75,14 +70,8 @@
         "assignments_tutors": {
             "tableName": "assignments_tutors",
             "schema": {
-                "id": {
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "autoIncrement": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
                 "assignmentId": {
+                    "primaryKey": true,
                     "field": "assignmentId",
                     "seqType": "Sequelize.STRING"
                 },

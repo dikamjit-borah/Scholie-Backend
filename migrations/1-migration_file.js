@@ -14,7 +14,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "migration_file",
-    "created": "2022-09-19T13:08:13.584Z",
+    "created": "2022-09-19T15:27:12.603Z",
     "comment": ""
 };
 
@@ -65,16 +65,11 @@ var migrationCommands = [{
         params: [
             "assignments_students",
             {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "field": "id",
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
                 "entryId": {
                     "type": Sequelize.INTEGER,
-                    "field": "entryId"
+                    "field": "entryId",
+                    "autoIncrement": true,
+                    "primaryKey": true
                 },
                 "assignmentId": {
                     "type": Sequelize.STRING,
@@ -101,16 +96,10 @@ var migrationCommands = [{
         params: [
             "assignments_tutors",
             {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "field": "id",
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
                 "assignmentId": {
                     "type": Sequelize.STRING,
-                    "field": "assignmentId"
+                    "field": "assignmentId",
+                    "primaryKey": true
                 },
                 "assignmentDescription": {
                     "type": Sequelize.STRING,

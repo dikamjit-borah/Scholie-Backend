@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   assignments_tutor.init({
-    assignmentId: DataTypes.STRING,
+    assignmentId: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
     assignmentDescription: DataTypes.STRING,
     assignmentPublishedAt: DataTypes.DATE,
     assignmentDeadline: DataTypes.DATE,

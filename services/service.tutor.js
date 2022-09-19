@@ -6,7 +6,7 @@ module.exports = {
         let err
         let isCreated = false
         try {
-            const query = `START TRANSACTION; INSERT INTO assignments_tutors (assignmentId, assignmentDescription, assignmentPublishedAt, assignmentDeadline) VALUES (?, ?, ?, ?); INSERT INTO assignments_students (entryId, assignmentId, studentId) VALUES ?; COMMIT;`
+            const query = `START TRANSACTION; INSERT INTO assignments_tutors (assignmentId, assignmentDescription, assignmentPublishedAt, assignmentDeadline) VALUES (?, ?, ?, ?); INSERT INTO assignments_students (assignmentId, studentId) VALUES ?; COMMIT;`
             let result = await db.query(query, {
                 replacements: args,
                 logging: console.log
@@ -16,6 +16,7 @@ module.exports = {
         } catch (error) {
             console.log(error)
             isCreated = false
+            err = error
         }
 
         return [err, isCreated]

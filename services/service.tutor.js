@@ -22,6 +22,24 @@ module.exports = {
         return [err, isCreated]
     },
 
+    fetchAssignmentDetails: async function (assignmentId) {
+        let err
+        let result
+        try {
+            const query = `SELECT * FROM assignments_students where assignmentId = '${assignmentId}';`
+            result = await db.query(query, {
+                logging: console.log
+            })
+
+        } catch (error) {
+            console.log(error)
+            err = error
+        }
+
+        return [err, result]
+    },
+
+
     insertIntoAssignmentsTutors: async function (...args) {
         let err
         let isCreated = false

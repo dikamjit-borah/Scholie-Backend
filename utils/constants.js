@@ -5,6 +5,11 @@ module.exports = {
         DB_CONN_ERROR: "Database connection could not be established",
 
         ASSIGNMENT_CREATE_ERR: "Error creating assignment",
-        ASSIGNMENT_CREATE_SUCCESS: "Assignment created successfully"
+        ASSIGNMENT_CREATE_SUCCESS: "Assignment created successfully",
+
+        ASSIGNMENT_DETAILS_ERR: "Error fetching assignment details",
+        ASSIGNMENT_DETAILS_SUCCESS: "Assignment details fetched successfully",
+        ASSIGNMENT_DETAILS_EMPTY: "Details for the given assignment id not found",
+        ASSIGNMENT_ID_INVALID: "Assignment id is empty or invalid. Please try again",
     }
 }

@@ -2,6 +2,23 @@ const db = require('../models/index').sequelize
 
 module.exports = {
 
+    fetchAssignmentDetails: async function (studentId, assignmentId) {
+        let err
+        let result
+        try {
+            const query = `SELECT * FROM assignments_students where studentId = '${studentId}' && assignmentId = '${assignmentId}';`
+            result = await db.query(query, {
+                logging: console.log
+            })
+
+        } catch (error) {
+            console.log(error)
+            err = error
+        }
+
+        return [err, result]
+    },
+
     fetchAllAssignments: async function (studentId) {
         let err
         let result

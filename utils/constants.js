@@ -13,11 +13,11 @@ module.exports = {
 
         ASSIGNMENT_DETAILS_ERR: "Error fetching assignment details",
         ASSIGNMENT_DETAILS_SUCCESS: "Assignment details fetched successfully",
-        ASSIGNMENT_DETAILS_EMPTY: "Details for the given assignment id not found",
+        ASSIGNMENT_DETAILS_EMPTY: "Details for the given id(s) not found",
 
         ASSIGNMENTS_ERR: "Error fetching assignments",
         ASSIGNMENTS_SUCCESS: "Assignments fetched successfully",
-        ASSIGNMENTS_EMPTY: "Assignments for the given id not found",
+        ASSIGNMENTS_EMPTY: "Assignments for the given id(s) not found",
 
         ID_INVALID: "The provided id is empty or invalid. Please try again",
 

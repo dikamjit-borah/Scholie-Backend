@@ -78,7 +78,7 @@ module.exports = {
                     if (result1[1] && result1[1].length && result1[1][0] && result1[1][0].length) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENT_DETAILS_SUCCESS, { assignmentDetails: result1[1][0] })
                     else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENT_DETAILS_EMPTY)
                 }
-            } else return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.ASSIGNMENT_ID_INVALID)
+            } else return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.ID_INVALID)
 
         } catch (error) {
             console.log(error);
@@ -88,8 +88,23 @@ module.exports = {
         return basicUtils.generateResponse(res)
     },
 
-    assignmentAll: function (req, res) {
-        basicUtils.logger(TAG, `Requesting ${req.url}`)
+    assignmentAll: async function (req, res) {
+        try {
+            basicUtils.logger(TAG, `Requesting ${req.url}`)
+            const tutorId = req.params.id
+            if (tutorId) {
+                const result1 = await serviceTutor.fetchAllAssignments(tutorId)
+                if (result1 && result1.length) {
+                    if (result1[0]) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENTS_ERR, { error: "" + result1[0] })
+                    if (result1[1] && result1[1].length && result1[1][0] && result1[1][0].length) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENTS_SUCCESS, { assignmentDetails: result1[1][0] })
+                    else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENTS_EMPTY)
+                }
+            } else return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.ID_INVALID)
+
+        } catch (error) {
+
+        }
+
         return basicUtils.generateResponse(res, httpStatus.OK, `OK`)
     }
 }

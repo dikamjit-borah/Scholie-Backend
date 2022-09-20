@@ -3,9 +3,11 @@ p_assignmentId varchar(255),
 p_assignmentDescription longtext, 
 p_assignmentPublishedAt datetime, 
 p_assignmentDeadline datetime, 
+p_assignmentStatus integer,
 p_tutorId integer,
 p_assignmentStudents varchar(255),
-p_assignmentStudentsCount integer
+p_assignmentStudentsCount integer,
+p_assignmentStatusStudent integer
 )
 BEGIN 
 
@@ -14,8 +16,8 @@ DECLARE _nextlen INT DEFAULT NULL;
 DECLARE _value TEXT DEFAULT NULL;
 
 START TRANSACTION;
-	INSERT INTO assignments_tutors (assignmentId, tutorId, assignmentDescription, assignmentPublishedAt, assignmentDeadline) 
-	VALUES (p_assignmentId, p_tutorId, p_assignmentDescription, p_assignmentPublishedAt, p_assignmentDeadline); 
+	INSERT INTO assignments_tutors (assignmentId, tutorId, assignmentDescription, assignmentPublishedAt, assignmentDeadline, assignmentStatus) 
+	VALUES (p_assignmentId, p_tutorId, p_assignmentDescription, p_assignmentPublishedAt, p_assignmentDeadline, p_assignmentStatus); 
     iterator:
 	LOOP
 		IF CHAR_LENGTH(TRIM(p_assignmentStudents)) = 0 OR p_assignmentStudents IS NULL THEN
@@ -24,7 +26,7 @@ START TRANSACTION;
         SET _next = SUBSTRING_INDEX(p_assignmentStudents,',',1);
 		SET _nextlen = CHAR_LENGTH(_next);
         SET _value = TRIM(_next);
-        INSERT INTO assignments_students (assignmentId, tutorId, studentId) VALUES (p_assignmentId, p_tutorId,_value);
+        INSERT INTO assignments_students (assignmentId, tutorId, studentId, assignmentStatus) VALUES (p_assignmentId, p_tutorId,_value, p_assignmentStatusStudent);
         SET p_assignmentStudents = INSERT(p_assignmentStudents,1,_nextlen + 1,'');
 	END LOOP;
     COMMIT;

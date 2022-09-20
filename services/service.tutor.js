@@ -6,7 +6,7 @@ module.exports = {
         let err
         let isCreated = false
         try {
-            const query = `CALL SP_CREATE_NEW_ASSIGNMENT (?, ?, ?, ?, ?, ?, ?);`
+            const query = `CALL SP_CREATE_NEW_ASSIGNMENT (?, ?, ?, ?, ?, ?, ?, ?, ?);`
             let result = await db.query(query, {
                 replacements: args,
                 logging: console.log

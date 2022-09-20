@@ -15,6 +15,7 @@ module.exports = {
                 assignmentPublishedAt,
                 assignmentDeadline,
                 assignmentStudents,
+                assignmentStatus,
                 tutorId } = { ...req.body }
 
             const assignmentId = v4()   //generate assignment id with uuid
@@ -39,9 +40,11 @@ module.exports = {
                 assignmentDescription,
                 assignmentPublishedAt,
                 assignmentDeadline,
+                assignmentStatus == '1' ? 1 : 0,
                 tutorId,
                 assignmentStudentsStr,
-                assignmentStudentsCount
+                assignmentStudentsCount,
+                assignmentStatusStudent = assignmentStatus == '1' ? 1 : 0,
             )
 
             if (result1 && result1.length) {

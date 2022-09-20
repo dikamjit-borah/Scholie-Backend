@@ -52,6 +52,11 @@
                     "field": "assignmentId",
                     "seqType": "Sequelize.STRING"
                 },
+                "tutorId": {
+                    "allowNull": false,
+                    "field": "tutorId",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "studentId": {
                     "field": "studentId",
                     "seqType": "Sequelize.INTEGER"
@@ -74,6 +79,11 @@
                     "primaryKey": true,
                     "field": "assignmentId",
                     "seqType": "Sequelize.STRING"
+                },
+                "tutorId": {
+                    "allowNull": false,
+                    "field": "tutorId",
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "assignmentDescription": {
                     "field": "assignmentDescription",

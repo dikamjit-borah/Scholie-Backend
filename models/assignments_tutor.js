@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       primaryKey: true,
     },
+    tutorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     assignmentDescription: DataTypes.STRING,
     assignmentPublishedAt: DataTypes.DATE,
     assignmentDeadline: DataTypes.DATE,

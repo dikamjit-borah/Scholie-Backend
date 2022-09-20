@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     assignmentId: DataTypes.STRING,
+    tutorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     studentId: DataTypes.INTEGER,
     assignmentRemark: DataTypes.STRING,
     assignmentStatus: DataTypes.INTEGER

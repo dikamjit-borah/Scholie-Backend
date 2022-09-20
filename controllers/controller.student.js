@@ -10,9 +10,23 @@ module.exports = {
         return basicUtils.generateResponse(res, httpStatus.OK, `OK`)
     },
 
-    assignmentAll: function (req, res) {
-        basicUtils.logger(TAG, `Requesting ${req.url}`)
-        return basicUtils.generateResponse(res, httpStatus.OK, `OK`)
+    assignmentAll: async function (req, res) {
+        try {
+            basicUtils.logger(TAG, `Requesting ${req.url}`)
+            const studentId = req.params.id
+            if (studentId && !isNaN(studentId)) {
+                const result1 = await serviceStudent.fetchAllAssignments(studentId)
+                if (result1 && result1.length) {
+                    if (result1[0]) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENTS_ERR, { error: "" + result1[0] })
+                    if (result1[1] && result1[1].length && result1[1][0] && result1[1][0].length) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENTS_SUCCESS, { assignmentDetails: result1[1][0] })
+                    else return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENTS_EMPTY)
+                }
+            } else return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.ID_INVALID)
+
+        } catch (error) {
+            return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENTS_ERR, { error: "" + error })
+        }
+        return basicUtils.generateResponse(res)
     },
 
     assignmentSubmit: async function (req, res) {

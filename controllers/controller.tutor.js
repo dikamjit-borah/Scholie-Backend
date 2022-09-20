@@ -102,9 +102,8 @@ module.exports = {
             } else return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.ID_INVALID)
 
         } catch (error) {
-
+            return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENTS_ERR, { error: "" + error })
         }
-
-        return basicUtils.generateResponse(res, httpStatus.OK, `OK`)
+        return basicUtils.generateResponse(res)
     }
 }

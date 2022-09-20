@@ -14,7 +14,8 @@ module.exports = {
                 assignmentDescription,
                 assignmentPublishedAt,
                 assignmentDeadline,
-                assignmentStudents } = { ...req.body }
+                assignmentStudents,
+                tutorId } = { ...req.body }
 
             const assignmentId = v4()   //generate assignment id with uuid
             let assignmentStudentsStr = ""
@@ -38,6 +39,7 @@ module.exports = {
                 assignmentDescription,
                 assignmentPublishedAt,
                 assignmentDeadline,
+                tutorId,
                 assignmentStudentsStr,
                 assignmentStudentsCount
             )

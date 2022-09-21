@@ -24,7 +24,6 @@ module.exports = {
         let result
         try {
             const query = this.queryFetchAllAssignments(studentId, publishedAt, status)
-            console.log(query);
             result = await db.query(query, {
                 logging: console.log
             })
@@ -39,11 +38,10 @@ module.exports = {
 
     queryFetchAllAssignments: function (studentId, publishedAt, status) {
         let query
-        //if(publishedAt && status) query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}';`
-        //if(publishedAt) query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}';`
-        if (status) query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}' AND assignmentStatus = '${status}';`
-        else query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}';`
-        return query                               
+        if (publishedAt && status) return query = `SELECT * from assignments_students where assignmentId in (SELECT assignmentId from assignments_tutors where assignmentStatus = '${publishedAt}') AND assignmentStatus = '${status}' AND studentId = '${studentId}';`
+        if (publishedAt) return query = `SELECT * from assignments_students where assignmentId in (SELECT assignmentId from assignments_tutors where assignmentStatus = '${publishedAt}') AND studentId = '${studentId}';`
+        if (status) return query = `SELECT * from assignments_students WHERE assignmentStatus = '${status}' AND studentId = '${studentId}';`
+        else return query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}';`
     },
 
     submitAssignment: async function (studentId, assignmentId, assignmentRemark) {

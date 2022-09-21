@@ -35,7 +35,6 @@ module.exports = {
             const studentId = req.params.id
             const publishedAt = req.query.publishedAt
             const status = req.query.status
-            console.log(publishedAt);
             if (studentId && !isNaN(studentId)) {
                 const result1 = await serviceStudent.fetchAllAssignments(studentId, validations.validatePublishedAt(publishedAt), validations.validateStatus(status))
                 if (result1 && result1.length) {

@@ -1,4 +1,7 @@
+require('dotenv').config()
+
 const db = require('../models/index').sequelize
+const jwt = require('jsonwebtoken')
 
 module.exports = {
     authenticateUser: async function (userName, userPassword) {
@@ -8,8 +11,9 @@ module.exports = {
         return [null, isValidUser = true]
     },
 
-    generateAuthToken: async function (userName, password) {
-        const authToken = "authToken"
+    generateAuthToken: function (userName, userType) {
+        const user = { userName, userType }
+        const authToken = jwt.sign(user, process.env.JWT_SECRET)
         return authToken
     }
 }

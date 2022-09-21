@@ -24,6 +24,7 @@ module.exports = {
         ASSIGNMENTS_EMPTY: "Assignments for the given id(s) or filters not found",
 
         ID_INVALID: "The provided id(s) are empty or invalid. Please try again",
-        USER_EMPTY: "Username or password is empty. Please try again with a proper request"
+        USER_EMPTY: "Username or password is empty. Please try again with a proper request",
+        USER_UNAUTHORIZED: "User is not authorized. Please sign in and try again"
     }
 }

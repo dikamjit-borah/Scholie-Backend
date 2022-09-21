@@ -1,8 +1,10 @@
 const express = require('express')
 const controllerTutor = require('../controllers/controller.tutor')
+const middlewareAuthentication = require('../middlewares/middleware.authentication')
 const router = express.Router()
 
-router.post('/tutor/assignment/create', controllerTutor.assignmentCreate)
+
+router.post('/tutor/assignment/create', middlewareAuthentication.authenticateUser, controllerTutor.assignmentCreate)
 router.patch('/tutor/assignment/update/:id', controllerTutor.assignmentUpdate)
 router.delete('/tutor/assignment/delete/:id', controllerTutor.assignmentDelete)
 

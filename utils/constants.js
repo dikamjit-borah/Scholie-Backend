@@ -4,6 +4,10 @@ module.exports = {
         DB_CONN_SUCCESS: "Database connection established successfully",
         DB_CONN_ERROR: "Database connection could not be established",
 
+        SIGNIN_ERR: "Error signing in",
+        SIGNIN_SUCCESS: "Sign in successful",
+        SIGNIN_FAILED: "Invalid credentials. Please try again with correct username and password",
+
         ASSIGNMENT_CREATE_ERR: "Error creating assignment",
         ASSIGNMENT_CREATE_SUCCESS: "Assignment created successfully",
 
@@ -19,7 +23,7 @@ module.exports = {
         ASSIGNMENTS_SUCCESS: "Assignments fetched successfully",
         ASSIGNMENTS_EMPTY: "Assignments for the given id(s) or filters not found",
 
-        ID_INVALID: "The provided id is empty or invalid. Please try again",
-
+        ID_INVALID: "The provided id(s) are empty or invalid. Please try again",
+        USER_EMPTY: "Username or password is empty. Please try again with a proper request"
     }
 }

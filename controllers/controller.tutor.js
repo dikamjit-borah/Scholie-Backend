@@ -5,6 +5,7 @@ const { v4 } = require("uuid")
 const serviceTutor = require("../services/service.tutor")
 const basicUtils = require("../utils/basic.utils")
 const constants = require("../utils/constants")
+const validations = require("../utils/validations")
 
 module.exports = {
     assignmentCreate: async function (req, res) {
@@ -98,7 +99,7 @@ module.exports = {
             const publishedAt = req.query.publishedAt
 
             if (tutorId) {
-                const result1 = await serviceTutor.fetchAllAssignments(tutorId, publishedAt && !isNaN(publishedAt) && (publishedAt == 0 || publishedAt == 1) ? publishedAt : null)
+                const result1 = await serviceTutor.fetchAllAssignments(tutorId, validations.validatePublishedAt(publishedAt))
                 if (result1 && result1.length) {
                     if (result1[0]) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENTS_ERR, { error: "" + result1[0] })
                     if (result1[1] && result1[1].length && result1[1][0] && result1[1][0].length) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENTS_SUCCESS, { assignmentDetails: result1[1][0] })

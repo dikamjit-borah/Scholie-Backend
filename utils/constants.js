@@ -25,6 +25,7 @@ module.exports = {
 
         ID_INVALID: "The provided id(s) are empty or invalid. Please try again",
         USER_EMPTY: "Username or password is empty. Please try again with a proper request",
-        USER_UNAUTHORIZED: "User is not authorized. Please sign in and try again"
+        USER_UNAUTHORIZED: "User is not authorized. Please sign in and try again",
+        USER_NOT_ALLOWED: "Current user is not permitted for the following action. Please sign in with different credentials and try again"
     }
 }

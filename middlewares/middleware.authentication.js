@@ -8,14 +8,13 @@ const constants = require('../utils/constants');
 
 module.exports = {
     authenticateUser: function (req, res, next) {
-        basicUtils.logger(TAG, `Authenticating user`)
         const token = req.headers.authorization
         if (token) {
             jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
                 if (err) {
                     return basicUtils.generateResponse(res, httpStatus.UNAUTHORIZED, constants.messages.USER_UNAUTHORIZED, { error: "" + err })
                 } else {
-                    req.user = decodedToken
+                    res.locals.user = decodedToken
                     next();
                 }
             });

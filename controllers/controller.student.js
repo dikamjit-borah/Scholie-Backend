@@ -3,6 +3,7 @@ const httpStatus = require("http-status")
 const basicUtils = require("../utils/basic.utils")
 const serviceStudent = require("../services/service.student")
 const constants = require("../utils/constants")
+const validations = require("../utils/validations")
 
 module.exports = {
     assignmentDetails: async function (req, res) {
@@ -32,8 +33,11 @@ module.exports = {
         try {
             basicUtils.logger(TAG, `Requesting ${req.url}`)
             const studentId = req.params.id
+            const publishedAt = req.query.publishedAt
+            const status = req.query.status
+            console.log(publishedAt);
             if (studentId && !isNaN(studentId)) {
-                const result1 = await serviceStudent.fetchAllAssignments(studentId)
+                const result1 = await serviceStudent.fetchAllAssignments(studentId, validations.validatePublishedAt(publishedAt), validations.validateStatus(status))
                 if (result1 && result1.length) {
                     if (result1[0]) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENTS_ERR, { error: "" + result1[0] })
                     if (result1[1] && result1[1].length && result1[1][0] && result1[1][0].length) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENTS_SUCCESS, { assignmentDetails: result1[1][0] })

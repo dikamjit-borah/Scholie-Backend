@@ -6,7 +6,7 @@ module.exports = {
         let err
         let result
         try {
-            const query = `SELECT * FROM assignments_students where studentId = '${studentId}' && assignmentId = '${assignmentId}';`
+            const query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}' && assignmentId = '${assignmentId}';`
             result = await db.query(query, {
                 logging: console.log
             })
@@ -19,11 +19,12 @@ module.exports = {
         return [err, result]
     },
 
-    fetchAllAssignments: async function (studentId) {
+    fetchAllAssignments: async function (studentId, publishedAt, status) {
         let err
         let result
         try {
-            const query = `SELECT * FROM assignments_students where studentId = '${studentId}';`
+            const query = this.queryFetchAllAssignments(studentId, publishedAt, status)
+            console.log(query);
             result = await db.query(query, {
                 logging: console.log
             })
@@ -34,6 +35,15 @@ module.exports = {
         }
 
         return [err, result]
+    },
+
+    queryFetchAllAssignments: function (studentId, publishedAt, status) {
+        let query
+        //if(publishedAt && status) query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}';`
+        //if(publishedAt) query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}';`
+        if (status) query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}' AND assignmentStatus = '${status}';`
+        else query = `SELECT * FROM assignments_students WHERE studentId = '${studentId}';`
+        return query                               
     },
 
     submitAssignment: async function (studentId, assignmentId, assignmentRemark) {

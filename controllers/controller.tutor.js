@@ -95,8 +95,10 @@ module.exports = {
         try {
             basicUtils.logger(TAG, `Requesting ${req.url}`)
             const tutorId = req.params.id
+            const publishedAt = req.query.publishedAt
+
             if (tutorId) {
-                const result1 = await serviceTutor.fetchAllAssignments(tutorId)
+                const result1 = await serviceTutor.fetchAllAssignments(tutorId, publishedAt && !isNaN(publishedAt) && (publishedAt == 0 || publishedAt == 1) ? publishedAt : null)
                 if (result1 && result1.length) {
                     if (result1[0]) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENTS_ERR, { error: "" + result1[0] })
                     if (result1[1] && result1[1].length && result1[1][0] && result1[1][0].length) return basicUtils.generateResponse(res, httpStatus.OK, constants.messages.ASSIGNMENTS_SUCCESS, { assignmentDetails: result1[1][0] })

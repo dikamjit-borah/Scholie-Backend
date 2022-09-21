@@ -39,11 +39,12 @@ module.exports = {
         return [err, result]
     },
 
-    fetchAllAssignments: async function (tutorId) {
+    fetchAllAssignments: async function (tutorId, publishedAt) {
         let err
         let result
         try {
-            const query = `SELECT * FROM assignments_tutors where tutorId = '${tutorId}';`
+
+            const query = publishedAt ? `SELECT * FROM assignments_tutors WHERE tutorId = '${tutorId}' AND assignmentStatus = '${publishedAt}';` : `SELECT * FROM assignments_tutors WHERE tutorId = '${tutorId}';`
             result = await db.query(query, {
                 logging: console.log
             })

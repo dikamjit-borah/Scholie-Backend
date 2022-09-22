@@ -22,16 +22,24 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    assignmentDescription: DataTypes.STRING,
+    assignmentDescription: {
+      type: DataTypes.TEXT
+    },
     assignmentPublishedAt: DataTypes.DATE,
     assignmentDeadline: DataTypes.DATE,
-    assignmentStatus: DataTypes.INTEGER
+    assignmentStatus: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'assignments_tutor',
     timestamps: false,
     createdAt: false,
     updatedAt: false,
+    indexes: [
+      {
+        unique: false,
+        fields: ['assignmentId', 'tutorId']
+      }
+    ]
   });
   return assignments_tutor;
 };

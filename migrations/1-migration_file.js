@@ -8,13 +8,15 @@ var Sequelize = require('sequelize');
  * createTable "assignments_mappings", deps: []
  * createTable "assignments_students", deps: []
  * createTable "assignments_tutors", deps: []
+ * addIndex "assignments_students_assignment_id_tutor_id" to table "assignments_students"
+ * addIndex "assignments_tutors_assignment_id_tutor_id" to table "assignments_tutors"
  *
  **/
 
 var info = {
     "revision": 1,
     "name": "migration_file",
-    "created": "2022-09-20T05:09:28.358Z",
+    "created": "2022-09-22T12:09:19.660Z",
     "comment": ""
 };
 
@@ -85,11 +87,11 @@ var migrationCommands = [{
                     "field": "studentId"
                 },
                 "assignmentRemark": {
-                    "type": Sequelize.STRING,
+                    "type": Sequelize.TEXT,
                     "field": "assignmentRemark"
                 },
                 "assignmentStatus": {
-                    "type": Sequelize.INTEGER,
+                    "type": Sequelize.BOOLEAN,
                     "field": "assignmentStatus"
                 }
             },
@@ -112,7 +114,7 @@ var migrationCommands = [{
                     "allowNull": false
                 },
                 "assignmentDescription": {
-                    "type": Sequelize.STRING,
+                    "type": Sequelize.TEXT,
                     "field": "assignmentDescription"
                 },
                 "assignmentPublishedAt": {
@@ -124,11 +126,33 @@ var migrationCommands = [{
                     "field": "assignmentDeadline"
                 },
                 "assignmentStatus": {
-                    "type": Sequelize.INTEGER,
+                    "type": Sequelize.BOOLEAN,
                     "field": "assignmentStatus"
                 }
             },
             {}
+        ]
+    },
+    {
+        fn: "addIndex",
+        params: [
+            "assignments_students",
+            ["assignmentId", "tutorId"],
+            {
+                "indexName": "assignments_students_assignment_id_tutor_id",
+                "name": "assignments_students_assignment_id_tutor_id"
+            }
+        ]
+    },
+    {
+        fn: "addIndex",
+        params: [
+            "assignments_tutors",
+            ["assignmentId", "tutorId"],
+            {
+                "indexName": "assignments_tutors_assignment_id_tutor_id",
+                "name": "assignments_tutors_assignment_id_tutor_id"
+            }
         ]
     }
 ];

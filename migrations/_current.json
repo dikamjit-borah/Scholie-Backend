@@ -63,14 +63,27 @@
                 },
                 "assignmentRemark": {
                     "field": "assignmentRemark",
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.TEXT"
                 },
                 "assignmentStatus": {
                     "field": "assignmentStatus",
-                    "seqType": "Sequelize.INTEGER"
+                    "seqType": "Sequelize.BOOLEAN"
                 }
             },
-            "indexes": []
+            "indexes": {
+                "fc34aa3f155bf6a6f7867b341ebe0b7db376f8a6": {
+                    "unique": false,
+                    "fields": [
+                        "assignmentId",
+                        "tutorId"
+                    ],
+                    "name": "assignments_students_assignment_id_tutor_id",
+                    "options": {
+                        "indexName": "assignments_students_assignment_id_tutor_id",
+                        "name": "assignments_students_assignment_id_tutor_id"
+                    }
+                }
+            }
         },
         "assignments_tutors": {
             "tableName": "assignments_tutors",
@@ -87,7 +100,7 @@
                 },
                 "assignmentDescription": {
                     "field": "assignmentDescription",
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.TEXT"
                 },
                 "assignmentPublishedAt": {
                     "field": "assignmentPublishedAt",
@@ -99,10 +112,23 @@
                 },
                 "assignmentStatus": {
                     "field": "assignmentStatus",
-                    "seqType": "Sequelize.INTEGER"
+                    "seqType": "Sequelize.BOOLEAN"
                 }
             },
-            "indexes": []
+            "indexes": {
+                "4a200636199ec88e36c935a378abb44d76c98655": {
+                    "unique": false,
+                    "fields": [
+                        "assignmentId",
+                        "tutorId"
+                    ],
+                    "name": "assignments_tutors_assignment_id_tutor_id",
+                    "options": {
+                        "indexName": "assignments_tutors_assignment_id_tutor_id",
+                        "name": "assignments_tutors_assignment_id_tutor_id"
+                    }
+                }
+            }
         }
     },
     "revision": 1

@@ -24,13 +24,11 @@ module.exports = {
             let assignmentStudentsStr = ""
             let assignmentStudentsCount
 
-            /* 
-            let assignmentsStudentsRows = []
-            if (assignmentStudents && Array.isArray(assignmentStudents) && assignmentStudents.length) {
-                assignmentsStudentsRows = assignmentStudents.map((studentId) => {
-                    return Object.values({ assignmentId, studentId })
-                })
-            } */
+            if (!assignmentDescription ||
+                !assignmentPublishedAt || !Date.parse(assignmentPublishedAt) ||
+                !assignmentDeadline || !Date.parse(assignmentDeadline) ||
+                !assignmentStudents || !Array.isArray(assignmentStudents) || !assignmentStudents.length ||
+                isNaN(tutorId)) return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.ASSIGNMENT_UPDATE_EMPTY)
 
             if (assignmentStudents && Array.isArray(assignmentStudents) && assignmentStudents.length) {
                 assignmentStudentsStr = assignmentStudents.join(',') //create str for sending as param to sp
@@ -40,8 +38,8 @@ module.exports = {
             const result1 = await serviceTutor.createNewAssignment(
                 assignmentId,
                 assignmentDescription,
-                assignmentPublishedAt = new Date(assignmentPublishedAt),
-                assignmentDeadline = new Date(assignmentDeadline),
+                basicUtils.formatDatetime(assignmentPublishedAt),
+                basicUtils.formatDatetime(assignmentDeadline),
                 assignmentStatus == '1' ? 1 : 0,
                 tutorId,
                 assignmentStudentsStr,
@@ -55,6 +53,7 @@ module.exports = {
             }
 
         } catch (error) {
+            console.log(error);
             return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENT_CREATE_ERR, { error: "" + error })
         }
 

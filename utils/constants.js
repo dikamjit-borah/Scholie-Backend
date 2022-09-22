@@ -17,7 +17,7 @@ module.exports = {
 
         ASSIGNMENT_UPDATE_ERR: "Error updating assignment",
         ASSIGNMENT_UPDATE_SUCCESS: "Assignment updated successfully",
-        ASSIGNMENT_UPDATE_EMPTY: "Please provide necessary details to update assignment",
+        ASSIGNMENT_UPDATE_EMPTY: "Please provide necessary and correct details to create or update assignment",
 
         ASSIGNMENT_DETAILS_ERR: "Error fetching assignment details",
         ASSIGNMENT_DETAILS_SUCCESS: "Assignment details fetched successfully",

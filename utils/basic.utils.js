@@ -23,5 +23,9 @@ module.exports = {
         }
 
         return res.status(statusCode ? statusCode : httpStatus.INTERNAL_SERVER_ERROR).send(response)
+    },
+
+    formatDatetime: function (dateString) {
+        return moment(new Date(dateString)).format('YYYY-MM-DD HH:mm:ss')
     }
 }

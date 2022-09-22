@@ -2,6 +2,7 @@ const TAG = "controller.tutor.js"
 
 const httpStatus = require("http-status")
 const { v4 } = require("uuid")
+const moment = require('moment')
 const serviceTutor = require("../services/service.tutor")
 const basicUtils = require("../utils/basic.utils")
 const constants = require("../utils/constants")
@@ -39,8 +40,8 @@ module.exports = {
             const result1 = await serviceTutor.createNewAssignment(
                 assignmentId,
                 assignmentDescription,
-                assignmentPublishedAt,
-                assignmentDeadline,
+                assignmentPublishedAt = new Date(assignmentPublishedAt),
+                assignmentDeadline = new Date(assignmentDeadline),
                 assignmentStatus == '1' ? 1 : 0,
                 tutorId,
                 assignmentStudentsStr,
@@ -60,9 +61,28 @@ module.exports = {
         return basicUtils.generateResponse(res)
     },
 
-    assignmentUpdate: function (req, res) {
-        basicUtils.logger(TAG, `Requesting ${req.url}`)
-        return basicUtils.generateResponse(res, httpStatus.OK, `OK`)
+    assignmentUpdate: async function (req, res) {
+        try {
+            basicUtils.logger(TAG, `Requesting ${req.url}`)
+            const assignmentId = req.params.id
+            const { assignmentDescription, assignmentDeadline } = { ...req.body }
+
+            if (assignmentId && (assignmentDescription || assignmentDeadline)) {
+                const result1 = await serviceTutor.updateAssignment(assignmentId, assignmentDescription ? assignmentDescription : null, Date.parse(assignmentDeadline) ? basicUtils.formatDatetime(assignmentDeadline) : null)
+                if (result1 && result1.length) {
+                    if (result1[0]) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENT_UPDATE_ERR, { error: "" + result1[0] })
+                    if (result1[1]) {
+                        if (result1[1] && result1[1][0] && result1[1][0][0]) return basicUtils.generateResponse(res, httpStatus.OK, Object.values(result1[1][0][0]).toString())
+                    }
+                }
+            } else return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.ASSIGNMENT_UPDATE_EMPTY)
+
+        } catch (error) {
+            console.log(error);
+            return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENT_DETAILS_ERR, { error: "" + error })
+        }
+
+        return basicUtils.generateResponse(res)
     },
 
     assignmentDelete: function (req, res) {

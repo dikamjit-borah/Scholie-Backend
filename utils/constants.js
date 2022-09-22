@@ -15,6 +15,10 @@ module.exports = {
         ASSIGNMENT_SUBMIT_SUCCESS: "Assignment submitted successfully",
         ASSIGNMENT_SUBMIT_EXIST: "Assignment has already been submitted",
 
+        ASSIGNMENT_UPDATE_ERR: "Error updating assignment",
+        ASSIGNMENT_UPDATE_SUCCESS: "Assignment updated successfully",
+        ASSIGNMENT_UPDATE_EMPTY: "Please provide necessary details to update assignment",
+
         ASSIGNMENT_DETAILS_ERR: "Error fetching assignment details",
         ASSIGNMENT_DETAILS_SUCCESS: "Assignment details fetched successfully",
         ASSIGNMENT_DETAILS_EMPTY: "Details for the given id(s) not found",

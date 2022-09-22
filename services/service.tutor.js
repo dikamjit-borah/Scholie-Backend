@@ -57,6 +57,26 @@ module.exports = {
         return [err, result]
     },
 
+    updateAssignment: async function (assignmentId, assignmentDescription, assignmentDeadline) {
+        let err
+        let data
+        try {
+            assignmentDescription = assignmentDescription ? `'${assignmentDescription}'` : null
+            assignmentDeadline = assignmentDeadline ? `'${assignmentDeadline}'` : null
+            const query = `SELECT FUNC_UPDATE_ASSIGNMENT('${assignmentId}', ${assignmentDescription}, ${assignmentDeadline})`
+            let result = await db.query(query, {
+                logging: console.log
+            })
+            data = result
+
+        } catch (error) {
+            console.log(error)
+            err = error
+        }
+
+        return [err, data]
+    },
+
     insertIntoAssignmentsTutors: async function (...args) {
         let err
         let isCreated = false

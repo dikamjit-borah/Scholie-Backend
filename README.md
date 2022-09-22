@@ -14,8 +14,8 @@ A simple stateless microservice with few API endpoints: <br>
 `uuid`
 
 ## ER
-[ER model](ER.md "ER model") <br>
-[ER diagram](ERD.jpg "ER diagram") <br>
+[ER model](er.md "ER model") <br>
+[ER diagram](erDiagram.jpg "ER diagram") <br>
 
 The database scholie_db comprises of 2 tables `assignments_tutors` and `assignments_students`. `assignments_tutors` has a `one-to-many` relationship with the `studentId` of `assignments_students`. Indexes are created on `assignmentId` and `tutorId` in both the tables.
 ## Installation

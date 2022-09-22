@@ -12,7 +12,7 @@ Table assignments_tutors {
 
 Table assignments_students {
   entryId int [pk]
-  assignmentId varchar (pk)
+  assignmentId varchar
   tutorId int
   studentId int
   assignmentRemark longtext

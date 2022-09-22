@@ -77,6 +77,25 @@ module.exports = {
         return [err, data]
     },
 
+    deleteAssignment: async function (assignmentId) {
+        let err
+        let data
+        try {
+            const query = `CALL SP_DELETE_ASSIGNMENT (?);`
+            let result = await db.query(query, {
+                replacements: [assignmentId],
+                logging: console.log
+            })
+
+            data = result
+        } catch (error) {
+            //console.log(error)
+            err = error
+        }
+
+        return [err, data]
+    },
+
     insertIntoAssignmentsTutors: async function (...args) {
         let err
         let isCreated = false

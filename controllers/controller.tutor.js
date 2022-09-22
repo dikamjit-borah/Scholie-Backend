@@ -85,9 +85,26 @@ module.exports = {
         return basicUtils.generateResponse(res)
     },
 
-    assignmentDelete: function (req, res) {
-        basicUtils.logger(TAG, `Requesting ${req.url}`)
-        return basicUtils.generateResponse(res, httpStatus.OK, `OK`)
+    assignmentDelete: async function (req, res) {
+        try {
+            basicUtils.logger(TAG, `Requesting ${req.url}`)
+            const assignmentId = req.params.id
+            if (assignmentId) {
+                const result1 = await serviceTutor.deleteAssignment(assignmentId)
+                if (result1 && result1.length) {
+                    if (result1[0]) return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENT_UPDATE_ERR, { error: "" + result1[0] })
+                    if (result1[1]) {
+                        if (result1[1] && result1[1][0]) return basicUtils.generateResponse(res, httpStatus.OK, Object.values(result1[1][0]).toString())
+                    }
+                }
+            } else return basicUtils.generateResponse(res, httpStatus.BAD_REQUEST, constants.messages.ASSIGNMENT_UPDATE_EMPTY)
+
+        } catch (error) {
+            console.log(error);
+            return basicUtils.generateResponse(res, httpStatus.INTERNAL_SERVER_ERROR, constants.messages.ASSIGNMENT_DETAILS_ERR, { error: "" + error })
+        }
+
+        return basicUtils.generateResponse(res)
     },
 
 

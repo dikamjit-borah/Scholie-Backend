@@ -1,10 +1,10 @@
 # Scholie
 Application for <br>
--tutors to assign students with assignments and view their submissions  <br> 
--students to view and submit assigned assignments <br>
+- tutors to assign students with assignments and view their submissions  <br> 
+- students to view and submit assigned assignments <br>
 A simple stateless microservice with few API endpoints: <br>
--Authentication endpoint
--REST API endpoints for a virtual classroom app
+- Authentication endpoint
+- REST API endpoints for a virtual classroom app
 ## Tech Stack
 `Node.js`
 `Express.js`
@@ -12,15 +12,23 @@ A simple stateless microservice with few API endpoints: <br>
 `sequelize`
 `sequelize-auto-migrations-v2`
 `uuid`
+
+## ER
+[ER model](ER.md "ER model")
+[ER diagram](ERD.png "ER diagram")
+
+The database scholie_db comprises of 2 tables `assignments_tutors` and `assignments_students`. `assignments_tutors` has a `one-to-many` relationship with the `studentId` of `assignments_students`. Indexes are created on `assignmentId` and `tutorId` in both the tables.
 ## Installation
+To run the application locally, set local db configuration in the config.json present in the config folder
 ```
 npm run prod
 ```
-This command will also run generated migrations to create necessary tables (if not present) required for proper functioning of the application
+>This command will also run generated migrations to create necessary tables (if not present) required for proper functioning of the application
 
 ## Api
 Documentation for the api endpoints provided in the following postman collection
 ```
+https://documenter.getpostman.com/view/18999728/2s7ZE4NQwa
 ```
 ## Project structure
 The project comprises of the following important entities

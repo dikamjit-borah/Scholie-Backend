@@ -1,6 +1,5 @@
 const express = require('express')
 const controllerStudent = require('../controllers/controller.student')
-const middlewareAuthentication = require('../middlewares/middleware.authentication')
 const middlewareUserType = require('../middlewares/middleware.user-type')
 const router = express.Router()
 

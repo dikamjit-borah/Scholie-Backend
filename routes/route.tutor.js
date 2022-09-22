@@ -1,6 +1,5 @@
 const express = require('express')
 const controllerTutor = require('../controllers/controller.tutor')
-const middlewareAuthentication = require('../middlewares/middleware.authentication')
 const middlewareUserType = require('../middlewares/middleware.user-type')
 const router = express.Router()
 

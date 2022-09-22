@@ -5,13 +5,17 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 
+const middlewareAuthentication = require('./middlewares/middleware.authentication')
 const routesAuthentication = require('./routes/route.authentication')
 const routesTutor = require('./routes/route.tutor')
 const routesStudent = require('./routes/route.student')
+
 const constants = require('./utils/constants')
 const basicUtils = require('./utils/basic.utils')
 
 app.use(routesAuthentication)
+
+app.use(middlewareAuthentication.authenticateUser)
 app.use(routesTutor)
 app.use(routesStudent)
 const port = process.env.PORT || 6061

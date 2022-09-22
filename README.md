@@ -1,10 +1,10 @@
 # Scholie
 Application for <br>
-*tutors to assign students with assignments and view their submissions  <br> 
-*students to view and submit assigned assignments <br>
+-tutors to assign students with assignments and view their submissions  <br> 
+-students to view and submit assigned assignments <br>
 A simple stateless microservice with few API endpoints: <br>
-*Authentication endpoint
-*REST API endpoints for a virtual classroom app
+-Authentication endpoint
+-REST API endpoints for a virtual classroom app
 ## Tech Stack
 `Node.js`
 `Express.js`
@@ -45,6 +45,21 @@ On hitting the `signIn` endpoint, the user receives a jwt token whose payload is
 
 >Invalid tokens, unauthenticated users and unauthorized userTypes are not allowed inside the protected routes
 
+##### Important assumptions
+- User type
+    - Tutor = `0`
+    - Student = `1`
+- Assignment status
+    - Tutor
+        - Ongoing = `0`
+        - Scheduled = `1`
+    - Student
+        - Overdue = `0`
+        - Pending = `1`
+        - Submitted = `2`
+    > If a assignment is `Scheduled` by the tutor, it is set as `Pending` for the student
+    > If a assignment is set as `Ongoing` by the tutor, it is set as `Overdue` for the student
+
 #### Assignment creation
 If the user is authenticated and authorized (as a tutor) to use `tutor/assignment/create`, then for creating an assignment a database SP `SP_CREATE_NEW_ASSIGNMENT` is called which contains a transaction, that inserts the assignment with a `assignmentId` into `assignment_tutors`, and for each of the assigned students, inserts into the `assignment_students` inside a `LOOP`
 
@@ -53,6 +68,12 @@ If the user is authenticated and authorized (as a student) to use `student/assig
 - check if `entryId` is present for the `assignmentId` and `studentId`
 - check if assignment is already submitted
 - if conditions are met, then change the submission status of the assignment to submitted (`assignmentStatus` is updated to 2)
+
+#### Fetching all assignments
+For the tutor feed, `publishedAt` (0 = ongoing or 1 = scheduled) filters can be applied
+For the student feed,  `publishedAt` (0 = ongoing or 1 = scheduled) and `status` (0 = overdue, 1 = pending, 2 = submitted) filters can be applied
+
+
 
 
 
